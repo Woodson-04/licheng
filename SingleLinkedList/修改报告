@@ -1,0 +1,13 @@
+改进了remove（） 删除当前节点，不过目前是在“currentPos == head”时设置为currentPos为删除节点的下一个节点;在“currentPos ！= head”时设置currentPos为删除节点的上一个节点
+
+
+5
+a	c	g	
+0 1
+3	
+1.5	2	9	4.7	8.8	
+1.5	2	8.8	9	4.7	
+
+
+1.5	2	4.7	8.8
+
