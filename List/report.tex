@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage{xeCJK}
+
+\title{第四次作业报告}
+\author{李城}
+\date{October 2024}
+
+\begin{document}
+
+\section*{测试设计}  
+你是如何设计\texttt{List.cpp}里的测试的？所有我测试的包括：  
+\begin{itemize}  
+    \item \texttt{empty()}  
+    \item \texttt{size()}  
+    \item \texttt{push\_back()}  
+    \item 前向迭代器  
+    \item \texttt{push\_front()}  
+    \item 后向迭代器  
+    \item \texttt{front()}  
+    \item \texttt{back()}  
+    \item \texttt{pop\_front()}  
+    \item \texttt{pop\_back()}  
+    \item \texttt{erase()}  
+    \item \texttt{insert()}  
+    \item 范围\texttt{erase()}  
+    \item 测试拷贝构造函数  
+    \item 测试移动构造函数  
+    \item 测试赋值操作符  
+    \item 测试移动赋值操作符  
+    \item 测试初始化列表构造函数  
+    \item \texttt{clear()}  
+\end{itemize}  
+  
+\section*{测试结果}  
+\textbf{你的测试结果是什么？}如下：  
+\begin{itemize}  
+    \item 初始化后列表是否为空: (应为true) \textbf{true}  
+    \item 列表大小: (应为0) \textbf{0}  
+\end{itemize}  
+  
+\textbf{调用 \texttt{push\_back(10, 20, 30)} 后}  
+\begin{itemize}  
+    \item 列表是否为空: (应为false) \textbf{false}  
+    \item 列表大小: (应为3) \textbf{3}  
+\end{itemize}  
+  
+\textbf{正向迭代遍历列表元素}  
+\begin{itemize}  
+    \item (应为10 20 30) \textbf{10 20 30}  
+\end{itemize}  
+  
+\textbf{调用\texttt{push\_front(5)}}  
+\begin{itemize}  
+    \item 列表大小: (应为4) \textbf{4}  
+\end{itemize}  
+  
+\textbf{反向迭代遍历列表元素}  
+\begin{itemize}  
+    \item （应为30 20 10 5）  
+\end{itemize}  
+  
+\textbf{第一个元素 (\texttt{front}):} (应为5) \textbf{5}  
+  
+\textbf{最后一个元素 (\texttt{back}):} (应为30) \textbf{30}  
+  
+\textbf{调用\texttt{pop\_front()}}  
+\begin{itemize}  
+    \item 第一个元素 (\texttt{front}): (应为10) \textbf{10}  
+    \item 列表大小: (应为3) \textbf{3}  
+\end{itemize}  
+  
+\textbf{调用\texttt{pop\_back()}}  
+\begin{itemize}  
+    \item 最后一个元素 (\texttt{back}): (应为20) \textbf{20}  
+    \item 列表大小: (应为2) \textbf{2}  
+\end{itemize}  
+  
+\textbf{调用\texttt{erase(第二个元素)}}  
+\begin{itemize}  
+    \item 列表大小: (应为1) \textbf{1}  
+    \item 列表元素: (应为10) \textbf{10}  
+\end{itemize}  
+  
+\textbf{在第二个位置插入25}  
+\begin{itemize}  
+    \item 列表元素: (应为10 25) \textbf{10 25}  
+\end{itemize}  
+  
+\textbf{后面添加元素40、50}  
+\begin{itemize}  
+    \item 列表元素: (应为10 25 40 50) \textbf{10 25 40 50}  
+\end{itemize}  
+  
+\textbf{调用\texttt{erase(第三个元素到最后一个元素)}}  
+\begin{itemize}  
+    \item 列表元素: (应为10 25) \textbf{10 25}  
+\end{itemize}  
+  
+\textbf{使用拷贝构造函数创建新列表}  
+\begin{itemize}  
+    \item 新列表元素: (10 25) \textbf{10 25}  
+\end{itemize}  
+  
+\textbf{使用移动构造函数创建新列表后,原列表为空吗?} (应为false) \textbf{false}  
+  
+\textbf{移动后的列表元素:} (应为10 25) \textbf{10 25}  
+  
+\textbf{使用赋值操作符将复制的列表赋值回原列表}  
+\begin{itemize}  
+    \item 原列表元素: (应为10 25) \textbf{10 25}  
+\end{itemize}  
+  
+\textbf{使用移动赋值操作符后,移动源列表为空吗} (应为true) \textbf{true}  
+  
+\textbf{移动后的列表元素:} (应为10 25) \textbf{10 25}  
+  
+\textbf{使用初始化列表创建列表}  
+\begin{itemize}  
+    \item 列表元素: (应为100 200 300) \textbf{100 200 300}  
+\end{itemize}  
+  
+\textbf{调用 \texttt{clear()} 后，列表为空吗?} (应为true) \textbf{true}  
+  
+\end{document}  
+
