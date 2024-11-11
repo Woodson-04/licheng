@@ -232,7 +232,11 @@ private:
     }
     BinaryNode *detachMin(BinaryNode *&t)
     {
-    if (t->left == nullptr) {
+    if (t == nullptr)
+    {
+        return nullptr;
+    }
+    else if (t->left == nullptr) {
         BinaryNode *temp = t;
         t = t->right;
         return temp;
