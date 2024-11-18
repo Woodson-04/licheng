@@ -1,5 +1,9 @@
 #include <iostream>
 
+#ifdef _WIN32
+#include <windows.h> // SetConsoleOutputCP
+#endif
+
 class UnderflowException {};
 
 template <typename Comperable>
@@ -47,6 +51,7 @@ public:
             printTree(root, out);
         }
     }
+
     void makeEmpty()
     {
         makeEmpty(root);
@@ -87,10 +92,10 @@ protected:
         BinaryNode *parent;
         int height;
 
-        BinaryNode(const Comperable &theElement, BinaryNode *lt, BinaryNode *rt)
-            :element(theElement), left(lt), right(rt), parent(parent), height(1){}
-        BinaryNode(Comperable &&theElement, BinaryNode *lt, BinaryNode *rt)
-            :element(std::move(theElement)), left(lt), right(rt), parent(parent), height(1){}
+        BinaryNode(const Comperable &theElement, BinaryNode *lt, BinaryNode *rt, BinaryNode *prt)
+            :element(theElement), left(lt), right(rt), parent(prt), height(1){}
+        BinaryNode(Comperable &&theElement, BinaryNode *lt, BinaryNode *rt, BinaryNode *prt)
+            :element(std::move(theElement)), left(lt), right(rt), parent(prt), height(1){}
     };
     BinaryNode *root;
 
@@ -136,7 +141,8 @@ protected:
             return true;
         }
     }
-    void printTree(BinaryNode *t, std::ostream &out) const
+    
+    /**void printTree(BinaryNode *t, std::ostream &out) const
     {
         if (t != nullptr)
         {
@@ -144,6 +150,37 @@ protected:
             out << t->element << std::endl;
             printTree(t->right, out);
         }
+    }**/
+
+    void printTree(BinaryNode *t, std::ostream &out, std::string prePrint = "", int numofChild = 1, bool noBrother = 1) const 
+    { 
+        #ifdef _WIN32        //设置输出流为UTF-8        
+        SetConsoleOutputCP(CP_UTF8);        
+        #endif        
+        //根节点输出“root”        
+        if(t == this->root)
+        {
+            out << "root" << std::endl; 
+        }        
+        //当前节点非空则输出数据        
+        if(t != nullptr)
+        {            
+            printTree(t->left, out, prePrint + (numofChild < 1 ? "    " : "│   "), 0, t->right == nullptr);            
+            //打印前导输出            
+            out << prePrint                
+            //判断当前节点是否是最后一个子节点，输出不同的枝杈                
+            << (numofChild < 1 ? "┌───" : "└───")                
+            << t->element                
+            << std::endl;            
+            //判断当前节点是否是最后一个子节点，添加不同的前导输出            
+            //判断是否有兄弟节点            
+            printTree(t->right, out, prePrint + (numofChild < 1 ? "│   " : "    "), 1, t->left == nullptr);
+        }        
+        //若当前节点为空但有兄弟节点，输出#        
+        else if(!noBrother)
+        {            
+            out << prePrint << (numofChild < 1 ? "┌───" : "└───") << "#" << std::endl;        
+        }       
     }
     
     void makeEmpty(BinaryNode *&t)
@@ -305,11 +342,12 @@ protected:
                 doubleWithLeftChild( t );
         else
         if( height( t->right ) - height( t->left ) > ALLOWED_IMBALANCE )
+        {
             if( height( t->right->right ) >= height( t->right->left ) )
                 rotateWithRightChild( t );
             else
                 doubleWithRightChild( t );
-                
+        }       
         t->height = max( height( t->left ), height( t->right ) ) + 1;
     }
 

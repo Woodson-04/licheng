@@ -49,11 +49,11 @@ private:
 
 public:
     void createChain(int N){
-        root = new node(1, nullptr, nullptr);
+        root = new node(1, nullptr, nullptr, nullptr);
         root->height = N;
         auto p = root;
         for(int i = 2; i <= N; i++){
-            p->right = new node(i, nullptr, nullptr);
+            p->right = new node(i, nullptr, nullptr, p );
             p = p->right;
             p->height = N - i + 1;
         }

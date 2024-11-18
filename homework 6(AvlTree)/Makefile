@@ -1,6 +1,6 @@
 # Compiler and options
 CXX = g++
-CXXFLAGS = -Wall -std=c++14
+CXXFLAGS = -g -Wall -std=c++14
 LATEX = xelatex
 
 # Files
@@ -20,7 +20,7 @@ $(EXECUTABLE): $(OBJECTS)
 
 # Compile C++ sources to objects
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -O2 -c $< -o $@
 
 # Target to run the program and display the test results
 run: $(EXECUTABLE)
