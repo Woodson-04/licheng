@@ -141,16 +141,6 @@ protected:
             return true;
         }
     }
-    
-    /**void printTree(BinaryNode *t, std::ostream &out) const
-    {
-        if (t != nullptr)
-        {
-            printTree(t->left, out);
-            out << t->element << std::endl;
-            printTree(t->right, out);
-        }
-    }**/
 
     void printTree(BinaryNode *t, std::ostream &out, std::string prePrint = "", int numofChild = 1, bool noBrother = 1) const 
     { 
@@ -273,9 +263,10 @@ protected:
             {
                 BinaryNode *temp = t;
                 t = t->right;
+                temp->parent = nullptr;
                 if (t != nullptr) 
                 {
-                    t->parent = (temp->parent);
+                    t->parent = temp->parent;
                 }
                 delete temp;
             } 
@@ -283,17 +274,28 @@ protected:
             {
                 BinaryNode *temp = t;
                 t = t->left;
-            if (t != nullptr) 
-            {
-                t->parent = (temp->parent);
-            }
-            delete temp;
+                temp->parent = nullptr;
+                if (t != nullptr) 
+                {
+                    t->parent = temp->parent;
+                }
+                delete temp;
             } 
             else 
             {
                 BinaryNode *temp = detachMin(t->right);
-                t->element = temp->element;
-                delete temp;
+                BinaryNode *oldNode = t;
+                temp->left = oldNode->left;
+                temp->right = oldNode->right;
+                temp->parent = oldNode->parent;
+                if (temp->left != nullptr) {
+                    temp->left->parent = temp;
+                }
+                if (temp->right != nullptr) {
+                    temp->right->parent = temp;
+                }
+                t = temp;
+                delete oldNode;
             }
         }
         BinaryNode *current = t;
@@ -307,24 +309,16 @@ protected:
 
     BinaryNode* detachMin(BinaryNode *&t) 
     {
+        if (t == nullptr) return nullptr;
         if (t->left == nullptr) 
         {
             BinaryNode *temp = t;
             t = t->right;
-            if (t != nullptr) 
-            {
-                t->parent = temp->parent;
-            }
             return temp;
         } 
         else 
         {
-            BinaryNode *minNode = detachMin(t->left);
-            if (t->left != nullptr) 
-            {
-                t->left->parent = t;
-            }
-            return minNode;
+            return detachMin(t->left);
         }
     }
 
@@ -367,10 +361,10 @@ protected:
         k2->left = k1->right;
         if (k1->right != nullptr) 
         {
-            k1->right->parent = k2; // 更新父节点指针
+            k1->right->parent = k2;
         }
         k1->right = k2;
-        k1->parent = k2->parent; // 更新父节点指针
+        k1->parent = k2->parent;
         k2->parent = k1;
         k2->height = max(height(k2->left), height(k2->right)) + 1;
         k1->height = max(height(k1->left), k2->height) + 1;
@@ -383,10 +377,10 @@ protected:
         k1->right = k2->left;
         if (k2->left != nullptr) 
         {
-            k2->left->parent = k1; // 更新父节点指针
+            k2->left->parent = k1;
         }
         k2->left = k1;
-        k2->parent = k1->parent; // 更新父节点指针
+        k2->parent = k1->parent;
         k1->parent = k2;
         k1->height = max(height(k1->left), height(k1->right)) + 1;
         k2->height = max(height(k2->right), k1->height) + 1;
@@ -404,6 +398,4 @@ protected:
         rotateWithLeftChild(k1->right);
         rotateWithRightChild(k1);
     }
-
-
 };
