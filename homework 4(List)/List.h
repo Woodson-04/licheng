@@ -71,7 +71,7 @@ public:
 
         Object& retrieve()
         {  
-        return const_cast<Object&>(const_iterator::retrieve());  
+            return const_cast<Object&>(const_iterator::retrieve());
         }  
 
         const Object &retrieve() const

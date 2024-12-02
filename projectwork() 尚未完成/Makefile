@@ -1,6 +1,6 @@
 # Compiler and options
 CXX = g++
-CXXFLAGS = -g -Wall -std=c++14 -O2
+CXXFLAGS = -g -Wall -std=c++20 -O2
 LATEX = xelatex
 
 # Files

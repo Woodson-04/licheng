@@ -1,0 +1,33 @@
+# Compiler and options  
+CXX = g++  
+CXXFLAGS = -Wall -std=c++14 -O2  # 添加了 -O2 优化选项  
+LATEX = pdflatex  
+  
+# Files  
+EXECUTABLE = Heapsort  
+SOURCES = test.cpp  
+OBJECTS = $(SOURCES:.cpp=.o)  
+TEXFILE = report.tex  
+  
+# Default target  
+all: $(EXECUTABLE)  
+  
+# Compile and link C++ program  
+$(EXECUTABLE): $(OBJECTS)  
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $@  
+  
+# Compile C++ sources to objects  
+%.o: %.cpp  
+	$(CXX) $(CXXFLAGS) -c $< -o $@  
+  
+# Target to compile LaTeX document to PDF  
+report: $(TEXFILE)  
+	$(LATEX) $(TEXFILE)  
+	$(LATEX) $(TEXFILE)  # Run twice if needed for references  
+  
+# Clean up objects, executables, and LaTeX generated files  
+clean:  
+	rm -f $(OBJECTS) $(EXECUTABLE) report.pdf report.aux report.log report.out  
+  
+# Phony targets  
+.PHONY: all report clean  
