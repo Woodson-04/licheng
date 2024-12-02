@@ -7,21 +7,21 @@ using namespace std;
 
 // 手动调整堆，使其满足最大堆性质
 void adjust_heap(std::vector<int>& vec, int i, int heap_size) {
-    int largest = i;
+    int max = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
-    if (left < heap_size && vec[left] > vec[largest]) {
-        largest = left;
+    if (left < heap_size && vec[left] > vec[max]) {
+        max = left;
     }
 
-    if (right < heap_size && vec[right] > vec[largest]) {
-        largest = right;
+    if (right < heap_size && vec[right] > vec[max]) {
+        max = right;
     }
 
-    if (largest != i) {
-        std::swap(vec[i], vec[largest]);
-        adjust_heap(vec, largest, heap_size);
+    if (max != i) {
+        std::swap(vec[i], vec[max]);
+        adjust_heap(vec, max, heap_size);
     }
 }
 

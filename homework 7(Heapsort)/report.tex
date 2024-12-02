@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex} 
+\usepackage{indentfirst}
+\usepackage{array}
+\title{REREPORT}
+\author{李城}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{必要函数及实现细节}
+\subsection{heapsort.h}
+\subsubsection{adjust\_heap()}
+递归调整堆：比较某节点和它的两个子节点的大小，将最大的放到当前节点位置，要是确实发生了交换操作，就要递归交换的子节点位置，进行adjust\_heap()操作
+\subsubsection{build\_heap()}
+设置从大到小遍历依次调整，逐步建立最大堆
+\subsubsection{Heapsort()}
+从大到小遍历：将最大元素与最后元素（第i个）交换，再对前面i-1个元素调用adjust\_heap()，保持最大堆结构
+\subsection{test.cpp}
+\subsubsection{四个序列的生成}
+全都是1000000大小：orderly顺序填充；random使用mt19937；reverse倒序填充；repeat依靠dis（0,9999）函数填充（0,9999）随机数字
+\subsubsection{check()}
+依次比较各个位置，当且仅当全一样输出1
+\section{测试流程}
+依次对random，orderly，reverse，repeat测试我的Heapsort和std：：sort\_heap()
+\section{列表比较}
+\begin{tabular}{|c|c|c|}
+\hline
+ & my heapsort time & std::sort\_heap time \\
+\hline
+random sequence & 235.339ms & 158.844ms \\
+\hline
+ordered sequence & 97.696ms & 66.1131ms \\
+\hline
+reverse sequence & 100.705ms & 80.5686ms \\
+\hline
+repetitive sequence & 215.726ms & 164.578ms \\
+\hline
+\end{tabular}
+
+\end{document}
