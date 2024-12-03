@@ -106,7 +106,7 @@ public:
 
         auto &retrieve()
         {
-            return const_cast<auto&>(const_iterater::retrieve());
+            return const_cast<auto&>(const_iterator::retrieve());
         }
 
         const auto &retrieve() const

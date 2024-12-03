@@ -218,9 +218,12 @@ private:
         {
             if (t->left != nullptr && t->right != nullptr)
             {
-                BinaryNode *minNode = detachMin(t->right);
-                t->element = minNode->element;
-                delete minNode;
+                BinaryNode *temp = detachMin(t->right);
+                BinaryNode *oldNode = t;
+                temp->left = oldNode->left;
+                temp->right = oldNode->right;
+                t = temp;
+                delete oldNode;
             } 
             else 
             {
