@@ -11,7 +11,7 @@ int main()
     std::cout << "Please Enter an operation Expresstion:";
     std::getline(std::cin, expression);
     List.test = expression;
-    std::stack
+    std::stack<auto>
     /*cinExpreesion(expression, cinList);
     postOperationExpression(cinList, postOperationList);
     return operation(postOperationList);*/
