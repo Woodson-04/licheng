@@ -239,7 +239,8 @@ private:
     {
         return nullptr;
     }
-    else if (t->left == nullptr) {
+    else if (t->left == nullptr)
+    {
         BinaryNode *temp = t;
         t = t->right;
         return temp;

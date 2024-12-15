@@ -104,9 +104,9 @@ public:
     protected:
         Node *current;
 
-        auto &retrieve()
+        auto& retrieve() const 
         {
-            return const_cast<auto&>(const_iterator::retrieve());
+            return const_iterator::retrieve();
         }
 
         const auto &retrieve() const
@@ -205,9 +205,13 @@ public:
         }
     protected:
         iterator(Node *p):const_iterator{p}
+        {
+
+        }
 
     };
-
+    
+public:
     List() {init();}
 
     ~List()
